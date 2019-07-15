@@ -20,9 +20,12 @@ y_data = np.square(x_data)-0.5 + noise
 xs = tf.placeholder(tf.float32,[None,1])
 ys = tf.placeholder(tf.float32,[None,1])
 #构建一个有输入层1个神经元，隐藏层有10个，输出层有一个
+#add hidden layer
 l1 = add_layer(xs,1,10,activation_function=tf.nn.relu)
+#add output layer
 prediction = add_layer(l1,10,1,activation_function=None)
 
+#the error between prediction and real data
 loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys-prediction),reduction_indices=[1]))
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
